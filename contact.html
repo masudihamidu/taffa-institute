@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles specific to the contact page */
+        .contact-form-container {
+            background-color: white;
+            padding: 60px 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        
+        .contact-info i {
+            width: 25px;
+            color: var(--primary-color);
+        }
+        
+        .contact-form {
+            background-color: var(--light-gray-color);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--font-primary);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .form-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .map-container {
+            background-color: var(--light-color);
+            padding: 60px 0;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                order: 2;
+            }
+            
+            .contact-form {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>Taffa Institute</h1>
+                        <p class="tagline">Learn, Excel, Succeed</p>
+                    </div>
+                </div>
+                <div class="language-selector">
+                    <a href="#" class="active">Eng</a>
+                    <a href="#">Swa</a>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="#">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                            <a href="#">Alumni</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="#">Postgraduate Programs</a>
+                            <a href="#">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#">FACULTIES</a></li>
+                    <li><a href="#">RESEARCH</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Contact Us</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-container">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>We'd love to hear from you. Please fill out the form or contact us using the information below.</p>
+                    <h3>Contact Information</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 5000, 10 Education Avenue, 10100 City Center</p>
+                    <p><i class="fas fa-phone"></i> +255 123 456 789</p>
+                    <p><i class="fas fa-fax"></i> +255 123 456 780</p>
+                    <p><i class="fas fa-envelope"></i> info@taffa.ac.tz</p>
+                    
+                    <h3>Office Hours</h3>
+                    <p><i class="fas fa-clock"></i> Monday - Friday: 8:00 AM - 4:30 PM</p>
+                    <p><i class="fas fa-clock"></i> Saturday: 9:00 AM - 12:00 PM</p>
+                    <p><i class="fas fa-clock"></i> Sunday & Public Holidays: Closed</p>
+                    
+                    <h3>Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="contactForm" action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiry">Type of Inquiry</label>
+                            <select id="inquiry" name="inquiry">
+                                <option value="">Select an option</option>
+                                <option value="admission">Admission Information</option>
+                                <option value="program">Program Details</option>
+                                <option value="fee">Fee Structure</option>
+                                <option value="scholarship">Scholarship & Financial Aid</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="form-btn">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-container">
+        <div class="container">
+            <h2>Our Location</h2>
+            <div class="map">
+                <!-- Replace src with your actual Google Maps embed URL -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15846.94528806316!2d39.2710237!3d-6.8146976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x185c4b11a6c0f061%3A0x740144c25b1df0ad!2sDar%20es%20Salaam%2C%20Tanzania!5e0!3m2!1sen!2sus!4v1626789456789!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 5000, 10 Education Avenue</p>
+                    <p><i class="fas fa-map-pin"></i> 10100 City Center</p>
+                    <p><i class="fas fa-phone"></i> +255 123 456 789</p>
+                    <p><i class="fas fa-fax"></i> +255 123 456 780</p>
+                    <p><i class="fas fa-envelope"></i> info@taffa.ac.tz</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Postgraduate Programs</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">Higher Education Student Loans Board</a></li>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for September Intake 2023-2024 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact form validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation (you can expand this)
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if(name && email && subject && message) {
+                // Normally would submit to server here
+                alert('Thank you for your message. We will get back to you soon!');
+                this.reset();
+            } else {
+                alert('Please fill all required fields.');
+            }
+        });
+    </script>
+</body>
+</html> 
