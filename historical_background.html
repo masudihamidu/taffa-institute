@@ -348,6 +348,79 @@
         </div>
     </section>
 
+    <!-- Philosophy Section -->
+    <section class="history-full">
+        <div class="container">
+            <h2>Our Philosophy</h2>
+            <div class="philosophy-section">
+                <div class="philosophy-item">
+                    <h3>Mission</h3>
+                    <p>To provide quality academic and professional training that nurtures creativity and innovation through integrated training, research and consultancy in shipping, logistics and related disciplines.</p>
+                </div>
+                
+                <div class="philosophy-item">
+                    <h3>Vision</h3>
+                    <p>To be a reputable world-class higher learning institution that is responsive to global development needs through provision of knowledge and competences in shipping, logistics management and related disciplines.</p>
+                </div>
+                
+                <div class="philosophy-item" style="grid-column: span 2;">
+                    <h3>Philosophy</h3>
+                    <p>The Institute will continue to be an agent for change in public and private sector development by offering quality market-driven academic and professional training, as well as research and consultancy services in the fields of shipping, logistics, and supply chain management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="history-full">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <div class="values-section">
+                <div class="values-grid">
+                    <div class="value-item accountability">
+                        <h4>ACCOUNTABILITY</h4>
+                        <p>Demonstrating high degree of accountability to our stakeholders and to the community for the mandated functions of the Institute.</p>
+                    </div>
+                    
+                    <div class="value-item transparency">
+                        <h4>TRANSPARENCY AND FAIRNESS</h4>
+                        <p>Being transparent in our work and dealings, standing ready for public scrutiny as well as applying uniform rules and standards.</p>
+                    </div>
+                    
+                    <div class="value-item teamwork">
+                        <h4>TEAMWORK</h4>
+                        <p>Promoting the culture of team spirit and compassion in order to create synergy in operations.</p>
+                    </div>
+                    
+                    <div class="value-item integrity">
+                        <h4>INTEGRITY AND INNOVATIVENESS</h4>
+                        <p>Demonstrating high fidelity, honesty, faithful and trustworthy behavior in all our operations as well as embracing new technologies.</p>
+                    </div>
+                    
+                    <div class="value-item trust">
+                        <h4>TRUST</h4>
+                        <p>Seeking to build trust in every interaction with customers and other stakeholders.</p>
+                    </div>
+                    
+                    <div class="value-item unity">
+                        <h4>UNITY</h4>
+                        <p>Promoting unity for effective teamwork and collaborative solutions.</p>
+                    </div>
+                    
+                    <div class="value-item diversity">
+                        <h4>DIVERSITY & GENDER EQUITY</h4>
+                        <p>Embracing diversity and gender equity in the life of the Institute to promote balance and utilize human resource potentials.</p>
+                    </div>
+                    
+                    <div class="value-item excellence">
+                        <h4>EXCELLENCE AND EFFICIENCY</h4>
+                        <p>Delivering prompt and exemplary services to Institute's stakeholders at all times.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer Section -->
     <footer>
         <div class="footer-top">
@@ -409,5 +482,107 @@
 
     <script src="script.js"></script>
     <script src="visitor-tracker.js"></script>
+    <script>
+        // Download Section Functionality
+        function downloadSection(sectionId) {
+            const section = document.querySelector(`.${sectionId}`);
+            if (!section) {
+                // If section not found by class, try finding it by containing ID
+                const parentSection = document.querySelector(`section:has(#${sectionId}), section:has(.${sectionId})`);
+                if (parentSection) {
+                    section = parentSection;
+                } else {
+                    console.error(`Section with id ${sectionId} not found`);
+                    return;
+                }
+            }
+
+            // Clone section to avoid modifying the original
+            const clonedSection = section.cloneNode(true);
+            
+            // Remove download button from cloned section
+            const downloadBtn = clonedSection.querySelector('.section-download');
+            if (downloadBtn) {
+                downloadBtn.remove();
+            }
+            
+            // Get section content
+            const content = clonedSection.innerHTML;
+            
+            // Create a blob and download link
+            const blob = new Blob([`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Taffa Institute - ${sectionId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</title>
+                    <style>
+                        body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            line-height: 1.6;
+                            color: #343a40;
+                            background-color: #f8f9fa;
+                            margin: 0;
+                            padding: 20px;
+                        }
+                        .container {
+                            max-width: 1200px;
+                            margin: 0 auto;
+                            padding: 20px;
+                            background-color: white;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            border-radius: 5px;
+                        }
+                        h2 {
+                            color: #0056b3;
+                            border-bottom: 2px solid #ffc107;
+                            padding-bottom: 10px;
+                        }
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                        }
+                        a {
+                            color: #0056b3;
+                            text-decoration: none;
+                        }
+                        a:hover {
+                            text-decoration: underline;
+                        }
+                        .btn {
+                            display: inline-block;
+                            padding: 8px 16px;
+                            background-color: #0056b3;
+                            color: white;
+                            border-radius: 4px;
+                            text-decoration: none;
+                        }
+                        .btn:hover {
+                            background-color: #004494;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        ${content}
+                    </div>
+                    <footer style="text-align: center; margin-top: 20px; color: #6c757d;">
+                        <p>&copy; ${new Date().getFullYear()} Taffa Institute of Shipping and Logistics. All Rights Reserved.</p>
+                    </footer>
+                </body>
+                </html>
+            `], {type: 'text/html'});
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `taffa-${sectionId}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
 </body>
 </html>

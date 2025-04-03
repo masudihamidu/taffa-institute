@@ -458,6 +458,7 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="visitor-tracker.js"></script>
     <script>
         // Advertisements filter functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -466,62 +467,102 @@
             
             // Add animation classes to all items on page load
             adsItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                item.style.transitionDelay = `${index * 0.1}s`;
-                
-                // Trigger animation after a small delay
                 setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, 100);
+                    item.classList.add('animated');
+                }, index * 100);
             });
             
             adsFilters.forEach(filter => {
-                filter.addEventListener('click', () => {
-                    // Remove active class from all filters
+                filter.addEventListener('click', function() {
+                    // Remove active class from all filter buttons
                     adsFilters.forEach(f => f.classList.remove('active'));
                     
-                    // Add active class to clicked filter
-                    filter.classList.add('active');
+                    // Add active class to clicked button
+                    this.classList.add('active');
                     
                     // Get filter value
-                    const filterValue = filter.getAttribute('data-filter');
+                    const filterValue = this.getAttribute('data-filter');
                     
-                    // Counter for setting animation delay
-                    let visibleCount = 0;
-                    
-                    // Show or hide ads items based on filter
+                    // Filter ads items with animation
                     adsItems.forEach(item => {
-                        const itemCategory = item.getAttribute('data-category');
+                        item.classList.remove('animated');
                         
-                        if (filterValue === 'all' || itemCategory === filterValue) {
-                            // Show the item with animation
-                            item.style.display = 'flex';
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(20px)';
-                            
-                            // Set different delays based on position
-                            setTimeout(() => {
-                                item.style.opacity = '1';
-                                item.style.transform = 'translateY(0)';
-                                item.style.transitionDelay = `${visibleCount * 0.1}s`;
-                                visibleCount++;
-                            }, 50);
-                        } else {
-                            // Hide the item with fade out
-                            item.style.opacity = '0';
-                            item.style.transform = 'translateY(10px)';
-                            
-                            setTimeout(() => {
+                        setTimeout(() => {
+                            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                                item.style.display = 'flex';
+                                setTimeout(() => {
+                                    item.classList.add('animated');
+                                }, 50);
+                            } else {
                                 item.style.display = 'none';
-                            }, 500);
-                        }
+                            }
+                        }, 300);
                     });
                 });
             });
+
+            // Setup advertisement PDF action buttons
+            const adActionButtons = document.querySelectorAll('.ads-btn');
+            adActionButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get button text to determine action
+                    const buttonText = this.textContent.trim();
+                    const adItem = this.closest('.ads-item');
+                    const adTitle = adItem.querySelector('.ads-title').textContent;
+                    const adCategory = adItem.getAttribute('data-category');
+                    
+                    // Different actions based on button text
+                    if (buttonText.includes('Download Brochure')) {
+                        downloadAdPDF(adTitle, adCategory, 'brochure');
+                    } else if (buttonText.includes('View Details') || buttonText.includes('View Job Description')) {
+                        viewAdPDF(adTitle, adCategory, 'details');
+                    } else if (buttonText.includes('Download Tender')) {
+                        downloadAdPDF(adTitle, adCategory, 'tender');
+                    } else if (buttonText.includes('Transfer Guidelines')) {
+                        viewAdPDF(adTitle, adCategory, 'guidelines');
+                    }
+                    // For "Apply Now", "Register Now", etc. - these would typically redirect to forms
+                    // and are not PDF downloads, so we don't handle them here
+                });
+            });
         });
+
+        // Function to download advertisement PDF
+        function downloadAdPDF(adTitle, adCategory, documentType) {
+            // In a real implementation, this would generate or fetch a PDF file
+            // For now, we'll show an alert to demonstrate
+            alert(`Downloading ${documentType} PDF for: ${adTitle}\n\nIn a real implementation, this would download a PDF document related to this advertisement.`);
+            
+            // In a real implementation, you would either:
+            // 1. Generate a PDF dynamically (similar to fee structure example)
+            // 2. Fetch a pre-made PDF file from the server
+            
+            // Example of fetching a file (in real implementation):
+            /*
+            const filename = `${adCategory}_${adTitle.toLowerCase().replace(/\s+/g, '_')}_${documentType}.pdf`;
+            const a = document.createElement('a');
+            a.href = `/documents/${filename}`;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            */
+        }
+
+        // Function to view advertisement PDF
+        function viewAdPDF(adTitle, adCategory, documentType) {
+            // In a real implementation, this would open a PDF file in a new tab/window
+            // For now, we'll show an alert to demonstrate
+            alert(`Viewing ${documentType} PDF for: ${adTitle}\n\nIn a real implementation, this would open a PDF document in a new tab or window.`);
+            
+            // In a real implementation, you would:
+            /*
+            const filename = `${adCategory}_${adTitle.toLowerCase().replace(/\s+/g, '_')}_${documentType}.pdf`;
+            window.open(`/documents/${filename}`, '_blank');
+            */
+        }
     </script>
 </body>
 </html>

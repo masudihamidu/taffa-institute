@@ -620,8 +620,9 @@ h2:after {
 
 /* Partners Section */
 .partners {
+    background-color: white;
     padding: 60px 0;
-    background-color: var(--light-gray-color);
+    text-align: center;
 }
 
 .partner-logos {
@@ -629,16 +630,92 @@ h2:after {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 .partner-logos img {
-    height: 60px;
-    margin: 15px;
-    transition: filter 0.3s ease;
+    max-width: 160px;
+    height: auto;
+    margin: 20px;
+    transition: transform 0.3s ease;
 }
 
 .partner-logos img:hover {
-    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.partner-slider-container {
+    position: relative;
+    max-width: 800px;
+    margin: 30px auto;
+    overflow: hidden;
+    padding: 0 50px;
+}
+
+.partner-slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.partner-slide {
+    min-width: 50%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.partner-slide img {
+    max-width: 160px;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.partner-slide img:hover {
+    transform: scale(1.1);
+}
+
+.partner-prev-btn,
+.partner-next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    z-index: 10;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.partner-prev-btn:hover,
+.partner-next-btn:hover {
+    opacity: 1;
+    background-color: var(--secondary-color);
+}
+
+.partner-prev-btn {
+    left: 0;
+}
+
+.partner-next-btn {
+    right: 0;
+}
+
+@media (max-width: 768px) {
+    .partner-slide {
+        min-width: 100%;
+    }
 }
 
 /* Visitor Count Section */
@@ -1241,4 +1318,36 @@ footer {
     .ads-wrapper {
         grid-template-columns: 1fr;
     }
+}
+
+/* Download Button */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.download-btn i {
+    font-size: 1rem;
+}
+
+.section-download {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -10px;
+    margin-bottom: 20px;
 } 
