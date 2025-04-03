@@ -21,6 +21,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Sticky Header Logic
+    const header = document.querySelector('header');
+    
+    // Function to calculate and update header height
+    function updateHeaderHeight() {
+        if (header) {
+            const headerHeight = header.offsetHeight;
+            document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
+            document.body.style.paddingTop = headerHeight + 'px';
+        }
+    }
+    
+    // Update header height initially
+    updateHeaderHeight();
+    
+    // Update header height on window resize
+    window.addEventListener('resize', updateHeaderHeight);
+    
+    // Create Back to Top Button
+    const backToTopButton = document.createElement('button');
+    backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    backToTopButton.className = 'back-to-top';
+    backToTopButton.title = 'Back to Top';
+    document.body.appendChild(backToTopButton);
+    
+    // Show/hide Back to Top button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('show');
+        } else {
+            backToTopButton.classList.remove('show');
+        }
+        
+        // Add scroll class to header for visual changes
+        if (window.pageYOffset > 0) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+    
+    // Scroll to top when button is clicked
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
     // Dropdown on mobile
     const dropdowns = document.querySelectorAll('.dropdown');
     
@@ -177,16 +226,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         });
-    });
-    
-    // Add shadow to navbar on scroll
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
     });
     
     // Create images directory structure

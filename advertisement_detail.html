@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement Details - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for advertisement detail page */
+        .ad-detail {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .ad-detail .container {
+            max-width: 900px;
+        }
+        
+        .ad-detail-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .ad-detail-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .ad-detail-meta {
+            display: flex;
+            gap: 20px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        
+        .ad-detail-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .ad-detail-category {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .ad-detail-content {
+            line-height: 1.8;
+            color: var(--gray-color);
+        }
+        
+        .ad-detail-content p {
+            margin-bottom: 20px;
+        }
+        
+        .ad-detail-content ul, .ad-detail-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .ad-detail-content li {
+            margin-bottom: 10px;
+        }
+        
+        .ad-detail-content h3 {
+            color: var(--primary-color);
+            margin: 30px 0 15px;
+            font-size: 1.3rem;
+        }
+        
+        .ad-detail-content h4 {
+            color: var(--primary-color);
+            margin: 25px 0 10px;
+            font-size: 1.1rem;
+        }
+        
+        .ad-detail-content strong {
+            color: var(--dark-color);
+        }
+        
+        .ad-detail-content a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        .ad-detail-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .ad-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .ad-action-btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .ad-action-btn.primary:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .ad-action-btn.secondary {
+            background-color: var(--light-gray-color);
+            color: var(--dark-color);
+        }
+        
+        .ad-action-btn.secondary:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .ad-action-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .ad-detail-title {
+                font-size: 1.6rem;
+            }
+            
+            .ad-detail-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .ad-detail-actions {
+                flex-direction: column;
+            }
+            
+            .ad-action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.jpg" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>TAFFA INSTITUTE OF <br> SHIPPING & LOGISTICS </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="historical_background.html">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="fee_structure.html">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#">FACULTIES</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Advertisement</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="advertisements.html">Advertisements</a></li>
+                    <li id="ad-breadcrumb-title">Advertisement Details</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Advertisement Detail Section -->
+    <section class="ad-detail">
+        <div class="container">
+            <div class="ad-detail-header">
+                <span class="ad-detail-category" id="ad-category">Category</span>
+                <h2 class="ad-detail-title" id="ad-title">Advertisement Title</h2>
+                <div class="ad-detail-meta">
+                    <span><i class="fas fa-calendar-alt"></i> Posted: <span id="ad-post-date">Date</span></span>
+                    <span><i class="fas fa-clock"></i> Deadline: <span id="ad-deadline">Deadline</span></span>
+                </div>
+            </div>
+            
+            <div class="ad-detail-content" id="ad-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+            
+            <div class="ad-detail-actions" id="ad-actions">
+                <a href="#" class="ad-action-btn primary" id="primary-button">
+                    <i class="fas fa-file"></i> Primary Action
+                </a>
+                <a href="#" class="ad-action-btn secondary" id="secondary-button">
+                    <i class="fas fa-download"></i> Secondary Action
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 7900, 10 Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-map-pin"></i> Tancot House, 4th Floor Sokoine/Pamba drive</p>
+                    <p><i class="fas fa-phone"></i> +255 (0) 22 211 8151 & +255 766 233 333</p>
+                    <p><i class="fas fa-envelope"></i> chuo@taffa.org</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute of shipping and logistics. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for May Intake 2025-2026 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="visitor-tracker.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get advertisement ID from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const adId = urlParams.get('id');
+            
+            // Define advertisement data
+            const advertisements = {
+                'intake-2025': {
+                    category: 'Admissions',
+                    title: 'APPLICATIONS OPEN FOR 2025/2026 ACADEMIC YEAR',
+                    postDate: 'June 30, 2023',
+                    deadline: 'August 30, 2023',
+                    content: `
+                        <h3>Admission Requirements</h3>
+                        <p>Taffa Institute of Freight Forwarding and Logistics Management invites applications from qualified candidates for various programs for the academic year 2025/2026.</p>
+                        
+                        <h4>Undergraduate Programs</h4>
+                        <ul>
+                            <li>Bachelor of Science in Supply Chain Management</li>
+                            <li>Bachelor of Science in Logistics Management</li>
+                            <li>Bachelor of Science in Customs Administration</li>
+                            <li>Bachelor of Science in Freight Forwarding and Shipping Management</li>
+                        </ul>
+                        
+                        <h4>Entry Requirements</h4>
+                        <p>Candidates must have the following qualifications:</p>
+                        <ul>
+                            <li>Minimum of two principal passes in relevant subjects at Advanced Level (Form VI)</li>
+                            <li>Five passes at Ordinary Level (Form IV) including Mathematics and English</li>
+                            <li>Equivalent qualifications from recognized institutions</li>
+                        </ul>
+                        
+                        <h3>Application Procedure</h3>
+                        <p>Applicants are required to:</p>
+                        <ol>
+                            <li>Complete the online application form available on our website</li>
+                            <li>Pay a non-refundable application fee of TZS 30,000</li>
+                            <li>Upload scanned copies of academic certificates, birth certificate, and passport-sized photograph</li>
+                        </ol>
+                        
+                        <h3>Important Dates</h3>
+                        <ul>
+                            <li><strong>Application Deadline:</strong> August 30, 2023</li>
+                            <li><strong>Admission List Publication:</strong> September 15, 2023</li>
+                            <li><strong>Registration Period:</strong> September 20-30, 2023</li>
+                            <li><strong>Orientation Week:</strong> October 2-6, 2023</li>
+                            <li><strong>Classes Commence:</strong> October 9, 2023</li>
+                        </ul>
+                    `,
+                    primaryButton: {
+                        text: 'Apply Now',
+                        icon: 'fas fa-user-plus',
+                        action: 'link',
+                        url: '#'
+                    },
+                    secondaryButton: {
+                        text: 'Download Brochure',
+                        icon: 'fas fa-download',
+                        action: 'download',
+                        filename: 'Taffa-Admission-Brochure-2025.pdf'
+                    }
+                },
+                'scholarship-2025': {
+                    category: 'Scholarships',
+                    title: 'SCHOLARSHIP OPPORTUNITIES FOR 2025/2026 ACADEMIC YEAR',
+                    postDate: 'July 5, 2023',
+                    deadline: 'September 15, 2023',
+                    content: `
+                        <h3>Available Scholarships</h3>
+                        <p>Taffa Institute is pleased to announce scholarship opportunities for the 2025/2026 academic year. The following scholarships are available:</p>
+                        
+                        <h4>Merit-Based Scholarships</h4>
+                        <ul>
+                            <li><strong>Full Tuition Scholarship:</strong> Awarded to top-performing applicants with exceptional academic records</li>
+                            <li><strong>Partial Tuition Scholarship (75%):</strong> Awarded to high-achieving applicants</li>
+                            <li><strong>Partial Tuition Scholarship (50%):</strong> Awarded to qualified applicants with good academic standing</li>
+                        </ul>
+                        
+                        <h4>Need-Based Scholarships</h4>
+                        <ul>
+                            <li><strong>Financial Need Scholarship:</strong> Covers 50% of tuition fees for students demonstrating financial need</li>
+                            <li><strong>Work-Study Program:</strong> Provides part-time employment opportunities on campus to help students finance their education</li>
+                        </ul>
+                        
+                        <h4>Special Category Scholarships</h4>
+                        <ul>
+                            <li><strong>Women in Logistics Scholarship:</strong> Aimed at increasing female participation in the logistics and supply chain industry</li>
+                            <li><strong>Disability Support Scholarship:</strong> For students with disabilities</li>
+                            <li><strong>Regional Diversity Scholarship:</strong> For students from underrepresented regions</li>
+                        </ul>
+                        
+                        <h3>Eligibility Criteria</h3>
+                        <ul>
+                            <li>Admission to any undergraduate program at Taffa Institute</li>
+                            <li>Academic excellence (GPA of 3.5 or higher for merit-based scholarships)</li>
+                            <li>Demonstrated leadership qualities and extracurricular achievements</li>
+                            <li>Financial need (for need-based scholarships)</li>
+                        </ul>
+                        
+                        <h3>Application Process</h3>
+                        <ol>
+                            <li>Complete the scholarship application form (available online)</li>
+                            <li>Submit academic transcripts and certificates</li>
+                            <li>Provide a personal statement (500 words maximum)</li>
+                            <li>Submit two recommendation letters</li>
+                            <li>For need-based scholarships, provide relevant financial documentation</li>
+                        </ol>
+                    `,
+                    primaryButton: {
+                        text: 'Apply for Scholarship',
+                        icon: 'fas fa-graduation-cap',
+                        action: 'link',
+                        url: '#'
+                    },
+                    secondaryButton: {
+                        text: 'Download Guidelines',
+                        icon: 'fas fa-download',
+                        action: 'download',
+                        filename: 'Taffa-Scholarship-Guidelines-2025.pdf'
+                    }
+                },
+                'faculty-positions': {
+                    category: 'Career Opportunities',
+                    title: 'VACANCY ANNOUNCEMENT: FACULTY POSITIONS',
+                    postDate: 'July 10, 2023',
+                    deadline: 'August 15, 2023',
+                    content: `
+                        <h3>Job Openings</h3>
+                        <p>The Taffa Institute of Freight Forwarding and Logistics Management invites applications from qualified individuals for the following faculty positions:</p>
+                        
+                        <h4>1. Senior Lecturer - Supply Chain Management</h4>
+                        <p><strong>Qualifications:</strong></p>
+                        <ul>
+                            <li>PhD in Supply Chain Management, Logistics, or related field</li>
+                            <li>Minimum of 5 years teaching experience at university level</li>
+                            <li>Strong research background with publications in reputable journals</li>
+                            <li>Industry experience is an added advantage</li>
+                        </ul>
+                        
+                        <h4>2. Lecturer - Customs and International Trade</h4>
+                        <p><strong>Qualifications:</strong></p>
+                        <ul>
+                            <li>PhD or Master's degree in Customs Administration, International Trade, or related field</li>
+                            <li>Minimum of 3 years teaching experience</li>
+                            <li>Professional certification in customs or trade-related field</li>
+                            <li>Experience working with customs authorities or trade organizations</li>
+                        </ul>
+                        
+                        <h4>3. Assistant Lecturer - Maritime Transport</h4>
+                        <p><strong>Qualifications:</strong></p>
+                        <ul>
+                            <li>Master's degree in Maritime Studies, Shipping Management, or related field</li>
+                            <li>Teaching experience is desirable but not mandatory</li>
+                            <li>Industry experience in shipping or port operations</li>
+                            <li>Good communication and presentation skills</li>
+                        </ul>
+                        
+                        <h3>Job Responsibilities</h3>
+                        <ul>
+                            <li>Teaching undergraduate and postgraduate courses</li>
+                            <li>Developing and reviewing curriculum</li>
+                            <li>Conducting research and publishing in relevant areas</li>
+                            <li>Supervising student projects and dissertations</li>
+                            <li>Participating in academic and administrative activities</li>
+                            <li>Engaging with industry partners for research and consultancy</li>
+                        </ul>
+                        
+                        <h3>Application Procedure</h3>
+                        <p>Interested candidates should submit the following documents:</p>
+                        <ol>
+                            <li>Detailed curriculum vitae</li>
+                            <li>Cover letter indicating the position applied for</li>
+                            <li>Copies of academic certificates and transcripts</li>
+                            <li>List of publications (if any)</li>
+                            <li>Names and contact details of three professional referees</li>
+                        </ol>
+                    `,
+                    primaryButton: {
+                        text: 'Apply for Position',
+                        icon: 'fas fa-user-tie',
+                        action: 'link',
+                        url: '#'
+                    },
+                    secondaryButton: {
+                        text: 'Download Job Description',
+                        icon: 'fas fa-download',
+                        action: 'download',
+                        filename: 'Taffa-Faculty-Positions-2023.pdf'
+                    }
+                },
+                'tender-lab-equipment': {
+                    category: 'Tenders',
+                    title: 'TENDER NOTICE: SUPPLY OF LABORATORY EQUIPMENT',
+                    postDate: 'July 15, 2023',
+                    deadline: 'July 31, 2023',
+                    content: `
+                        <h3>Tender Details</h3>
+                        <p>Taffa Institute invites sealed tenders from eligible suppliers for the supply, installation, and maintenance of logistics and supply chain simulation laboratory equipment.</p>
+                        
+                        <h4>Equipment Required</h4>
+                        <ul>
+                            <li>Supply Chain Simulation Software (Enterprise License)</li>
+                            <li>Warehouse Management System</li>
+                            <li>RFID Equipment and Readers</li>
+                            <li>Barcode Scanners and Printers</li>
+                            <li>Inventory Management Hardware</li>
+                            <li>Transport Management Simulation Equipment</li>
+                            <li>Virtual Reality Sets for Training</li>
+                        </ul>
+                        
+                        <h4>Eligibility Criteria</h4>
+                        <ul>
+                            <li>Must be a registered company with at least 5 years of experience in supplying educational equipment</li>
+                            <li>Must have completed at least 3 similar projects in the last 3 years</li>
+                            <li>Must provide manufacturer authorization for all major equipment</li>
+                            <li>Must have technical capacity to provide installation and maintenance services</li>
+                            <li>Must be tax compliant</li>
+                        </ul>
+                        
+                        <h3>Tender Documents</h3>
+                        <p>Tender documents can be obtained from the Procurement Office at Taffa Institute upon payment of a non-refundable fee of TZS 100,000.</p>
+                        
+                        <h3>Submission Guidelines</h3>
+                        <p>Tenders must be submitted in sealed envelopes clearly marked "TENDER FOR SUPPLY OF LABORATORY EQUIPMENT - REF: TAFFA/TEN/LAB/2023/01" not later than July 31, 2023, at 4:00 PM East African Time.</p>
+                        
+                        <h3>Important Information</h3>
+                        <ul>
+                            <li><strong>Pre-bid Meeting:</strong> July 20, 2023, at 10:00 AM</li>
+                            <li><strong>Site Visit:</strong> July 21, 2023, from 9:00 AM to 1:00 PM</li>
+                            <li><strong>Tender Opening:</strong> July 31, 2023, at 4:30 PM</li>
+                        </ul>
+                        
+                        <p>The Taffa Institute reserves the right to accept or reject any tender and is not bound to accept the lowest or any tender.</p>
+                    `,
+                    primaryButton: {
+                        text: 'Download Tender Documents',
+                        icon: 'fas fa-download',
+                        action: 'download',
+                        filename: 'Taffa-Tender-Lab-Equipment-2023.pdf'
+                    },
+                    secondaryButton: {
+                        text: 'Submit Tender Online',
+                        icon: 'fas fa-paper-plane',
+                        action: 'link',
+                        url: '#'
+                    }
+                },
+                'open-day-2023': {
+                    category: 'Events',
+                    title: 'OPEN DAY FOR PROSPECTIVE STUDENTS',
+                    postDate: 'July 20, 2023',
+                    deadline: 'August 5, 2023',
+                    content: `
+                        <h3>Event Details</h3>
+                        <p>The Taffa Institute will host an Open Day on August 5, 2023, from 9:00 AM to 4:00 PM. Prospective students and their parents are invited to tour our facilities, meet faculty members, and learn about our academic programs.</p>
+                        
+                        <h4>Activities</h4>
+                        <ul>
+                            <li><strong>9:00 AM - 10:00 AM:</strong> Registration and Welcome Address</li>
+                            <li><strong>10:00 AM - 11:30 AM:</strong> Presentation on Academic Programs</li>
+                            <li><strong>11:30 AM - 12:30 PM:</strong> Campus Tour</li>
+                            <li><strong>12:30 PM - 1:30 PM:</strong> Lunch Break</li>
+                            <li><strong>1:30 PM - 2:30 PM:</strong> Interactive Sessions with Faculty</li>
+                            <li><strong>2:30 PM - 3:30 PM:</strong> Student Life Showcase</li>
+                            <li><strong>3:30 PM - 4:00 PM:</strong> Q&A Session and Closing Remarks</li>
+                        </ul>
+                        
+                        <h4>Highlights</h4>
+                        <ul>
+                            <li>Tour of state-of-the-art Supply Chain Simulation Laboratory</li>
+                            <li>Demonstrations of logistics management software</li>
+                            <li>Information on scholarship opportunities</li>
+                            <li>Student projects exhibition</li>
+                            <li>One-on-one consultations with academic advisors</li>
+                            <li>On-the-spot application assistance</li>
+                        </ul>
+                        
+                        <h3>Registration</h3>
+                        <p>Registration is free but required for planning purposes. Please register online or by contacting our admissions office.</p>
+                        
+                        <h3>Venue</h3>
+                        <p>Taffa Institute Main Campus<br>
+                        123 University Avenue<br>
+                        Dar es Salaam, Tanzania</p>
+                        
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.954556243077!2d39.273482!3d-6.779736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNDYnNDcuMCJTIDM5wrAxNicyNC41IkU!5e0!3m2!1sen!2tz!4v1625584362548!5m2!1sen!2tz" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    `,
+                    primaryButton: {
+                        text: 'Register Now',
+                        icon: 'fas fa-user-plus',
+                        action: 'link',
+                        url: '#'
+                    },
+                    secondaryButton: {
+                        text: 'Download Program',
+                        icon: 'fas fa-download',
+                        action: 'download',
+                        filename: 'Taffa-Open-Day-Program-2023.pdf'
+                    }
+                }
+            };
+            
+            // Get the advertisement data based on ID
+            const advertisement = advertisements[adId];
+            
+            if (advertisement) {
+                // Update page elements with advertisement data
+                document.getElementById('ad-category').textContent = advertisement.category;
+                document.getElementById('ad-title').textContent = advertisement.title;
+                document.getElementById('ad-post-date').textContent = advertisement.postDate;
+                document.getElementById('ad-deadline').textContent = advertisement.deadline;
+                document.getElementById('ad-content').innerHTML = advertisement.content;
+                
+                // Update primary button
+                const primaryButton = document.getElementById('primary-button');
+                primaryButton.innerHTML = `<i class="${advertisement.primaryButton.icon}"></i> ${advertisement.primaryButton.text}`;
+                
+                if (advertisement.primaryButton.action === 'download') {
+                    primaryButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        // For demonstration purposes, just show an alert
+                        alert(`Downloading ${advertisement.primaryButton.filename}`);
+                        
+                        // In a real implementation, you would generate or fetch the actual PDF
+                        // Example code for when you have actual files:
+                        // window.location.href = `downloads/${advertisement.primaryButton.filename}`;
+                    });
+                } else {
+                    primaryButton.href = advertisement.primaryButton.url;
+                }
+                
+                // Update secondary button if exists
+                if (advertisement.secondaryButton) {
+                    const secondaryButton = document.getElementById('secondary-button');
+                    secondaryButton.style.display = 'inline-flex';
+                    secondaryButton.innerHTML = `<i class="${advertisement.secondaryButton.icon}"></i> ${advertisement.secondaryButton.text}`;
+                    
+                    if (advertisement.secondaryButton.action === 'download') {
+                        secondaryButton.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            // For demonstration purposes, just show an alert
+                            alert(`Downloading ${advertisement.secondaryButton.filename}`);
+                            
+                            // In a real implementation, you would generate or fetch the actual PDF
+                            // Example code for when you have actual files:
+                            // window.location.href = `downloads/${advertisement.secondaryButton.filename}`;
+                        });
+                    } else {
+                        secondaryButton.href = advertisement.secondaryButton.url;
+                    }
+                } else {
+                    document.getElementById('secondary-button').style.display = 'none';
+                }
+                
+                // Update page title
+                document.title = `${advertisement.title} - Taffa Institute`;
+            } else {
+                // Handle case when advertisement is not found
+                document.getElementById('ad-content').innerHTML = `
+                    <div class="error-message">
+                        <h2>Advertisement Not Found</h2>
+                        <p>The advertisement you are looking for does not exist or has been removed.</p>
+                        <a href="advertisements.html" class="btn">View All Advertisements</a>
+                    </div>
+                `;
+                document.getElementById('ad-actions').style.display = 'none';
+                document.title = 'Advertisement Not Found - Taffa Institute';
+            }
+        });
+    </script>
+</body>
+</html> 
