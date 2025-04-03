@@ -88,80 +88,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Campus Slider
-    const campusSlider = document.querySelector('.campus-slider');
+    // Campus Slider - similar to Hero Slider
     const campusSlides = document.querySelectorAll('.campus-slide');
-    const campusPrevBtn = document.querySelector('.campuses .prev-btn');
-    const campusNextBtn = document.querySelector('.campuses .next-btn');
+    const campusPrevBtn = document.querySelector('.campus-prev-btn');
+    const campusNextBtn = document.querySelector('.campus-next-btn');
+    let currentCampusSlide = 0;
+    const campusSlideInterval = 6000; // 6 seconds
     
-    if (campusSlides.length > 0 && campusSlider) {
-        let isDragging = false;
-        let startPos = 0;
-        let currentTranslate = 0;
-        let prevTranslate = 0;
+    function showCampusSlide(index) {
+        campusSlides.forEach(slide => slide.classList.remove('active'));
         
-        // For touch devices
-        campusSlider.addEventListener('touchstart', touchStart);
-        campusSlider.addEventListener('touchend', touchEnd);
-        campusSlider.addEventListener('touchmove', touchMove);
+        if (index >= campusSlides.length) {
+            currentCampusSlide = 0;
+        } else if (index < 0) {
+            currentCampusSlide = campusSlides.length - 1;
+        } else {
+            currentCampusSlide = index;
+        }
         
-        // For mouse
-        campusSlider.addEventListener('mousedown', touchStart);
-        campusSlider.addEventListener('mouseup', touchEnd);
-        campusSlider.addEventListener('mouseleave', touchEnd);
-        campusSlider.addEventListener('mousemove', touchMove);
-        
+        campusSlides[currentCampusSlide].classList.add('active');
+    }
+    
+    function nextCampusSlide() {
+        showCampusSlide(currentCampusSlide + 1);
+    }
+    
+    function prevCampusSlide() {
+        showCampusSlide(currentCampusSlide - 1);
+    }
+    
+    if (campusSlides.length > 0) {
         if (campusPrevBtn) {
             campusPrevBtn.addEventListener('click', function() {
-                navigate(-1);
+                prevCampusSlide();
+                resetCampusSlideInterval();
             });
         }
         
         if (campusNextBtn) {
             campusNextBtn.addEventListener('click', function() {
-                navigate(1);
+                nextCampusSlide();
+                resetCampusSlideInterval();
             });
         }
         
-        function navigate(direction) {
-            const slideWidth = campusSlider.clientWidth / 3;
-            currentTranslate = prevTranslate + direction * slideWidth;
-            
-            // Check bounds
-            if (currentTranslate > 0) {
-                currentTranslate = 0;
-            } else if (currentTranslate < -(campusSlides.length - 3) * slideWidth) {
-                currentTranslate = -(campusSlides.length - 3) * slideWidth;
-            }
-            
-            prevTranslate = currentTranslate;
-            setSliderPosition();
-        }
+        let campusSlideTimer = setInterval(nextCampusSlide, campusSlideInterval);
         
-        function touchStart(event) {
-            startPos = getPositionX(event);
-            isDragging = true;
-        }
-        
-        function touchMove(event) {
-            if (isDragging) {
-                const currentPosition = getPositionX(event);
-                currentTranslate = prevTranslate + currentPosition - startPos;
-                setSliderPosition();
-            }
-        }
-        
-        function touchEnd() {
-            isDragging = false;
-            prevTranslate = currentTranslate;
-        }
-        
-        function getPositionX(event) {
-            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-        }
-        
-        function setSliderPosition() {
-            campusSlider.style.transform = `translateX(${currentTranslate}px)`;
+        function resetCampusSlideInterval() {
+            clearInterval(campusSlideTimer);
+            campusSlideTimer = setInterval(nextCampusSlide, campusSlideInterval);
         }
     }
     

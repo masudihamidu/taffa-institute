@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Structure - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for fee structure page */
+        .fee-structure {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .fee-structure .container {
+            max-width: 1000px;
+        }
+        
+        .fee-item {
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: white;
+        }
+        
+        .fee-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fee-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        .fee-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .fee-summary {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .fee-badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .fee-badge i {
+            font-size: 0.8rem;
+        }
+        
+        .fee-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .fee-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .fee-item.active .fee-content {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .fee-item.active .fee-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .fee-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .fee-table th, .fee-table td {
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .fee-table th {
+            background-color: var(--light-gray-color);
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .fee-table tr:nth-child(even) {
+            background-color: var(--light-color);
+        }
+        
+        .fee-table tr:hover {
+            background-color: rgba(0, 86, 179, 0.05);
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .fee-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .fee-filter-btn {
+            padding: 8px 16px;
+            background-color: var(--light-gray-color);
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .fee-filter-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .fee-filter-btn:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+        
+        .page-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .fee-summary {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .fee-badge {
+                font-size: 0.8rem;
+            }
+            
+            .fee-table th, .fee-table td {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.jpg" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>TAFFA INSTITUTE OF <br> SHIPPING & LOGISTICS </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="historical_background.html">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="fee_structure.html">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#">FACULTIES</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Fee Structure</h1>
+            <p>Comprehensive information about tuition fees and other charges for all programs</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Study at Taffa</a></li>
+                    <li>Fee Structure</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Fee Structure Section -->
+    <section class="fee-structure">
+        <div class="container">
+            <p>Only First Year Programme Fee is shown, Expand to view tuition fees and other charges for all year(s) of study</p>
+            
+            <div class="fee-filter">
+                <button class="fee-filter-btn active" data-filter="all">All Programs</button>
+                <button class="fee-filter-btn" data-filter="certificate">Certificate</button>
+                <button class="fee-filter-btn" data-filter="diploma">Diploma</button>
+                <button class="fee-filter-btn" data-filter="bachelor">Bachelor's Degree</button>
+            </div>
+            
+            <!-- Certificate Programs -->
+            <div class="fee-item" data-category="certificate">
+                <div class="fee-header">
+                    <h3>Basic Technician Certificate in Shipping and Logistics</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,050,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 1,126
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>800,000</td>
+                                <td>1,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>250,000</td>
+                                <td>126</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            
+            <div class="fee-item" data-category="certificate">
+                <div class="fee-header">
+                    <h3>Basic Technician Certificate in Customs and Tax Management</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,050,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 1,126
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>800,000</td>
+                                <td>1,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>250,000</td>
+                                <td>126</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Diploma Programs -->
+            <div class="fee-item" data-category="diploma">
+                <div class="fee-header">
+                    <h3>Ordinary Diploma in Shipping and Logistics Management</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,450,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 1,326
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>1,200,000</td>
+                                <td>1,200</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>250,000</td>
+                                <td>126</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>2</td>
+                                <td>1,200,000</td>
+                                <td>1,200</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>2</td>
+                                <td>50,000</td>
+                                <td>26</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            
+            <div class="fee-item" data-category="diploma">
+                <div class="fee-header">
+                    <h3>Ordinary Diploma in Maritime Transport</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,650,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 1,526
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>1,400,000</td>
+                                <td>1,400</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>250,000</td>
+                                <td>126</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>2</td>
+                                <td>1,400,000</td>
+                                <td>1,400</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>2</td>
+                                <td>50,000</td>
+                                <td>26</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Bachelor Programs -->
+            <div class="fee-item" data-category="bachelor">
+                <div class="fee-header">
+                    <h3>Bachelor of Science in Shipping and Logistics Management</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,855,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 2,078
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>155,000</td>
+                                <td>78</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>2</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>2</td>
+                                <td>55,000</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>3</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>3</td>
+                                <td>55,000</td>
+                                <td>28</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+            
+            <div class="fee-item" data-category="bachelor">
+                <div class="fee-header">
+                    <h3>Bachelor of Science in International Trade and Customs</h3>
+                    <div class="fee-summary">
+                        <div class="fee-badge">
+                            <i class="fas fa-money-bill-wave"></i> Tshs: 1,855,000
+                        </div>
+                        <div class="fee-badge">
+                            <i class="fas fa-dollar-sign"></i> US$: 2,078
+                        </div>
+                    </div>
+                    <div class="fee-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="fee-content">
+                    <table class="fee-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Year of Study</th>
+                                <th>Local Students (Tshs)</th>
+                                <th>International Students (US$)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>1</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>1</td>
+                                <td>155,000</td>
+                                <td>78</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>2</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>2</td>
+                                <td>55,000</td>
+                                <td>28</td>
+                            </tr>
+                            <tr>
+                                <td>Tuition Fee</td>
+                                <td>3</td>
+                                <td>1,700,000</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr>
+                                <td>Other Charges</td>
+                                <td>3</td>
+                                <td>55,000</td>
+                                <td>28</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 7900, 10 Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-map-pin"></i> Tancot House, 4th Floor Sokoine/Pamba drive</p>
+                    <p><i class="fas fa-phone"></i> +255 (0) 22 211 8151 & +255 766 233 333</p>
+                    <p><i class="fas fa-envelope"></i> chuo@taffa.org</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute of shipping and logistics. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for May Intake 2025-2026 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Fee structure expand/collapse functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const feeHeaders = document.querySelectorAll('.fee-header');
+            
+            feeHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const feeItem = this.parentElement;
+                    feeItem.classList.toggle('active');
+                });
+            });
+            
+            // Fee filter functionality
+            const filterButtons = document.querySelectorAll('.fee-filter-btn');
+            const feeItems = document.querySelectorAll('.fee-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide fee items based on filter
+                    feeItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

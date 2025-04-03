@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for news page */
+        .news-full {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .news-full .container {
+            max-width: 1000px;
+        }
+        
+        .news-filters {
+            display: flex;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .news-filter {
+            padding: 8px 16px;
+            background-color: var(--light-gray-color);
+            border: none;
+            border-radius: 30px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .news-filter.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .news-filter:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        
+        .news-card {
+            background-color: var(--light-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .news-card:hover .news-img img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--gray-color);
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        
+        .news-category {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .news-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .news-excerpt {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .news-read-more {
+            align-self: start;
+            color: var(--primary-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        
+        .news-read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .news-read-more:hover {
+            color: var(--secondary-color);
+        }
+        
+        .news-read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            color: var(--gray-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .pagination a:hover, .pagination a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.jpg" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>TAFFA INSTITUTE OF <br> SHIPPING & LOGISTICS </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="historical_background.html">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="#">Postgraduate Programs</a>
+                            <a href="#">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#">FACULTIES</a></li>
+                    <li><a href="#">RESEARCH</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                    <li><a href="events.html">EVENTS</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="advertisements.html">ADVERTISEMENTS</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>News & Updates</h1>
+            <p>Stay informed with the latest news and updates from Taffa Institute</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li>News & Updates</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-full">
+        <div class="container">
+            <div class="news-filters">
+                <button class="news-filter active" data-filter="all">All News</button>
+                <button class="news-filter" data-filter="academic">Academic</button>
+                <button class="news-filter" data-filter="events">Events</button>
+                <button class="news-filter" data-filter="admissions">Admissions</button>
+                <button class="news-filter" data-filter="research">Research</button>
+                <button class="news-filter" data-filter="partnerships">Partnerships</button>
+            </div>
+            
+            <div class="news-grid">
+                <div class="news-card" data-category="partnerships">
+                    <div class="news-img">
+                        <img src="images/news1.jpg" alt="Partnership with International Universities">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">June 10, 2023</span>
+                            <span class="news-category">Partnerships</span>
+                        </div>
+                        <h3 class="news-title">NEW PARTNERSHIP WITH INTERNATIONAL UNIVERSITIES</h3>
+                        <p class="news-excerpt">Taffa Institute has signed partnership agreements with leading universities from Europe and Asia to enhance student exchange programs and collaborative research initiatives. This development will offer our students international exposure and broaden research opportunities.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="academic">
+                    <div class="news-img">
+                        <img src="images/news2.jpg" alt="Graduates Excel in National Competition">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">June 15, 2023</span>
+                            <span class="news-category">Academic</span>
+                        </div>
+                        <h3 class="news-title">TAFFA GRADUATES EXCEL IN NATIONAL COMPETITION</h3>
+                        <p class="news-excerpt">Our graduates have secured top positions in the national technology challenge organized by the Ministry of Technology. Their innovative solutions in supply chain management received high praise from industry experts and government officials.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="admissions">
+                    <div class="news-img">
+                        <img src="images/news3.jpg" alt="Applications Open for 2025 Intake">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">July 01, 2023</span>
+                            <span class="news-category">Admissions</span>
+                        </div>
+                        <h3 class="news-title">APPLICATIONS OPEN FOR 2025 INTAKE</h3>
+                        <p class="news-excerpt">The Taffa Institute is pleased to announce that applications for the 2025 academic year are now open. Prospective students can apply for Certificate, Diploma, Undergraduate and Postgraduate programs through our online application portal.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="research">
+                    <div class="news-img">
+                        <img src="images/news4.jpg" alt="Research Grant Award">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">July 05, 2023</span>
+                            <span class="news-category">Research</span>
+                        </div>
+                        <h3 class="news-title">TAFFA INSTITUTE RECEIVES MAJOR RESEARCH GRANT</h3>
+                        <p class="news-excerpt">Our Department of Logistics and Supply Chain Management has been awarded a significant research grant to study sustainable logistics practices in East Africa. The three-year project will involve collaboration with industry partners and government agencies.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="events">
+                    <div class="news-img">
+                        <img src="images/news5.jpg" alt="Annual Academic Conference">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">July 10, 2023</span>
+                            <span class="news-category">Events</span>
+                        </div>
+                        <h3 class="news-title">ANNUAL ACADEMIC CONFERENCE TO BE HELD IN AUGUST</h3>
+                        <p class="news-excerpt">The Taffa Institute will host its Annual Academic Conference from August 20-22, 2023. This year's theme is "Innovation in Shipping and Logistics in the Digital Age." Renowned speakers from academia and industry will present their research and insights.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="news-card" data-category="partnerships">
+                    <div class="news-img">
+                        <img src="images/news6.jpg" alt="Industry Partnership">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-date">July 15, 2023</span>
+                            <span class="news-category">Partnerships</span>
+                        </div>
+                        <h3 class="news-title">NEW INDUSTRY PARTNERSHIP ENHANCES PRACTICAL TRAINING</h3>
+                        <p class="news-excerpt">Taffa Institute has established a new partnership with leading shipping and logistics companies to enhance practical training opportunities for our students. This collaboration will include internships, industry projects, and guest lectures from industry experts.</p>
+                        <a href="#" class="news-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 7900, 10 Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-map-pin"></i> Tancot House, 4th Floor Sokoine/Pamba drive</p>
+                    <p><i class="fas fa-phone"></i> +255 (0) 22 211 8151 & +255 766 233 333</p>
+                    <p><i class="fas fa-envelope"></i> chuo@taffa.org</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute of shipping and logistics. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for September Intake 2025-2026 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // News filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.news-filter');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            // Add show class to all cards on page load
+            newsCards.forEach(card => {
+                card.classList.add('show');
+            });
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Filter news cards
+                    newsCards.forEach(card => {
+                        if (filterValue === 'all') {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.classList.add('show');
+                            }, 50);
+                        } else {
+                            const cardCategory = card.getAttribute('data-category');
+                            if (cardCategory === filterValue) {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.classList.add('show');
+                                }, 50);
+                            } else {
+                                card.classList.remove('show');
+                                setTimeout(() => {
+                                    card.style.display = 'none';
+                                }, 300);
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
