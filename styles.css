@@ -9,6 +9,7 @@
     --light-gray-color: #e9ecef;
     --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-secondary: 'Arial', sans-serif;
+    --header-height: 145px; /* Approximate height of the header (adjust based on your header) */
 }
 
 * {
@@ -22,6 +23,7 @@ body {
     line-height: 1.6;
     color: var(--dark-color);
     background-color: var(--light-color);
+    padding-top: var(--header-height); /* Add padding to the top of the body equal to the header height */
 }
 
 .container {
@@ -86,10 +88,39 @@ h2:after {
 }
 
 /* Header Styles */
+header {
+    position: fixed; /* Fix the header to the top of the page */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the header appears above all other content */
+    background-color: white; /* Add background color to prevent content from showing through */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow for visual separation */
+    transition: all 0.3s ease; /* Smooth transition for header changes */
+}
+
+header.scrolled .top-bar {
+    padding: 5px 0; /* Reduce padding when scrolled */
+}
+
+header.scrolled .logo {
+    height: 60px; /* Smaller logo when scrolled */
+    transition: height 0.3s ease;
+}
+
+header.scrolled .logo-text h1 {
+    font-size: 1.5rem; /* Smaller text when scrolled */
+}
+
+header.scrolled .main-nav {
+    padding: 5px 0; /* Reduce padding when scrolled */
+}
+
 .top-bar {
     background-color: var(--primary-color);
     color: white;
     padding: 10px 0;
+    transition: padding 0.3s ease; /* Smooth transition for padding changes */
 }
 
 .top-bar .container {
@@ -106,6 +137,7 @@ h2:after {
 .logo {
     height: 80px;
     margin-right: 15px;
+    transition: height 0.3s ease; /* Smooth transition for logo size changes */
 }
 
 .logo-text h1 {
@@ -134,6 +166,7 @@ h2:after {
     background-color: var(--secondary-color);
     padding: 10px 0;
     position: relative;
+    transition: padding 0.3s ease; /* Smooth transition for padding changes */
 }
 
 .main-nav .container {
@@ -981,6 +1014,18 @@ footer {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: var(--header-height); /* Re-apply with the correct value */
+    }
+    
+    header.scrolled .logo {
+        height: 50px; /* Even smaller logo on mobile when scrolled */
+    }
+    
+    header.scrolled .logo-text h1 {
+        font-size: 1.3rem; /* Smaller text on mobile when scrolled */
+    }
+    
     .mobile-menu-btn {
         display: block;
         position: absolute;
@@ -991,7 +1036,7 @@ footer {
     }
 
     .nav-links {
-        display: none;
+        display: none; /* Initially hidden on mobile */
         flex-direction: column;
         position: absolute;
         top: 100%;
@@ -1000,10 +1045,12 @@ footer {
         background-color: var(--secondary-color);
         padding: 10px 0;
         z-index: 10;
+        max-height: calc(100vh - var(--header-height)); /* Set max height to prevent overflow */
+        overflow-y: auto; /* Add scrolling if needed */
     }
 
     .nav-links.active {
-        display: flex;
+        display: flex; /* Show when active class is added */
     }
 
     .dropdown-content {
@@ -1350,4 +1397,55 @@ footer {
     justify-content: flex-end;
     margin-top: -10px;
     margin-bottom: 20px;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top i {
+    font-size: 1.2rem;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .back-to-top i {
+        font-size: 1rem;
+    }
 } 

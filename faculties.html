@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculties - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for faculties page */
+        .faculties-full {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .faculties-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .faculty-card-full {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .faculty-card-full:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .faculty-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .faculty-icon-full {
+            font-size: 2.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .faculty-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            flex: 1;
+        }
+        
+        .faculty-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .faculty-description {
+            margin-bottom: 20px;
+            color: var(--gray-color);
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .program-highlights {
+            margin-bottom: 20px;
+        }
+        
+        .program-highlights h4 {
+            font-size: 1rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .program-highlights ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .program-highlights li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+            color: var(--dark-color);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .program-highlights li:last-child {
+            border-bottom: none;
+        }
+        
+        .program-highlights li:before {
+            content: "\f0da";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+        
+        .faculty-actions {
+            margin-top: auto;
+        }
+        
+        .faculty-btn {
+            display: block;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .faculty-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        @media (max-width: 992px) {
+            .faculties-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.jpg" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>TAFFA INSTITUTE OF <br> SHIPPING & LOGISTICS </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="historical_background.html">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="fee_structure.html">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="faculties.html">FACULTIES</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Faculties</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Faculties</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Faculties Section -->
+    <section class="faculties-full">
+        <div class="container">
+            <h2>OUR FACULTIES</h2>
+            <p>Taffa Institute offers a range of specialized faculties dedicated to excellence in education, research, and innovation in their respective fields. Explore our faculties to learn more about our academic programs, research initiatives, and faculty members.</p>
+            
+            <div class="faculties-grid">
+                <div class="faculty-card-full">
+                    <div class="faculty-header">
+                        <div class="faculty-icon-full">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>FACULTY OF COMPUTING AND TECHNOLOGY</h3>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-description">
+                            <p>The Faculty of Computing and Technology is dedicated to providing students with cutting-edge education in computing, information technology, and digital solutions for the shipping and logistics industry. Our programs emphasize both theoretical knowledge and practical skills to prepare graduates for successful careers.</p>
+                        </div>
+                        <div class="program-highlights">
+                            <h4>Featured Programs:</h4>
+                            <ul>
+                                <li>Bachelor of Science in Information Technology</li>
+                                <li>Bachelor of Science in Supply Chain Information Systems</li>
+                                <li>Master of Science in Logistics Information Systems</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-actions">
+                            <a href="faculty_detail.html?id=computing" class="faculty-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faculty-card-full">
+                    <div class="faculty-header">
+                        <div class="faculty-icon-full">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>FACULTY OF FINANCE AND BANKING</h3>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-description">
+                            <p>The Faculty of Finance and Banking is committed to developing financial professionals with specialized knowledge in shipping, logistics and supply chain finance. Our programs combine robust financial theory with practical applications specific to the maritime and logistics industries.</p>
+                        </div>
+                        <div class="program-highlights">
+                            <h4>Featured Programs:</h4>
+                            <ul>
+                                <li>Bachelor of Finance in Shipping and Logistics</li>
+                                <li>Bachelor of Banking and International Trade Finance</li>
+                                <li>Master of Maritime Finance</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-actions">
+                            <a href="faculty_detail.html?id=finance" class="faculty-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faculty-card-full">
+                    <div class="faculty-header">
+                        <div class="faculty-icon-full">
+                            <i class="fas fa-ship"></i>
+                        </div>
+                        <h3>FACULTY OF MARITIME STUDIES</h3>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-description">
+                            <p>The Faculty of Maritime Studies provides comprehensive education in maritime operations, shipping management, and nautical sciences. With a focus on practical training and industry standards, we prepare students for careers in the global maritime sector, equipping them with the knowledge and skills needed for success.</p>
+                        </div>
+                        <div class="program-highlights">
+                            <h4>Featured Programs:</h4>
+                            <ul>
+                                <li>Bachelor of Science in Maritime Transport</li>
+                                <li>Bachelor of Science in Shipping Management</li>
+                                <li>Diploma in Nautical Studies</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-actions">
+                            <a href="#" class="faculty-btn">Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faculty-card-full">
+                    <div class="faculty-header">
+                        <div class="faculty-icon-full">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>FACULTY OF LOGISTICS AND SUPPLY CHAIN</h3>
+                    </div>
+                    <div class="faculty-body">
+                        <div class="faculty-description">
+                            <p>The Faculty of Logistics and Supply Chain Management is dedicated to developing professionals who can design, implement, and manage efficient supply chain systems. Our curriculum integrates theoretical foundations with real-world applications, preparing students to address complex logistics challenges in a global context.</p>
+                        </div>
+                        <div class="program-highlights">
+                            <h4>Featured Programs:</h4>
+                            <ul>
+                                <li>Bachelor of Science in Supply Chain Management</li>
+                                <li>Bachelor of Science in Logistics Management</li>
+                                <li>Master of Logistics and Supply Chain Management</li>
+                            </ul>
+                        </div>
+                        <div class="faculty-actions">
+                            <a href="#" class="faculty-btn">Coming Soon</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 7900, 10 Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-map-pin"></i> Tancot House, 4th Floor Sokoine/Pamba drive</p>
+                    <p><i class="fas fa-phone"></i> +255 (0) 22 211 8151 & +255 766 233 333</p>
+                    <p><i class="fas fa-envelope"></i> chuo@taffa.org</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="fee_structure.html">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for May Intake 2025-2026 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="visitor-tracker.js"></script>
+</body>
+</html> 
