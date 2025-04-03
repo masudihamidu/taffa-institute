@@ -716,7 +716,51 @@
                     });
                 });
             });
+
+            // Set up download buttons for individual fee structures
+            const downloadButtons = document.querySelectorAll('.fee-content .download-btn');
+            downloadButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Get the parent fee item
+                    const feeItem = this.closest('.fee-item');
+                    const programTitle = feeItem.querySelector('.fee-header h3').textContent;
+                    const feeTable = feeItem.querySelector('.fee-table');
+                    
+                    // Generate PDF for this specific program
+                    generateProgramPDF(programTitle, feeTable);
+                });
+            });
         });
+
+        // Function to generate PDF for a specific program
+        function generateProgramPDF(programTitle, feeTable) {
+            // Use a library like jsPDF or html2pdf.js
+            // For now, we'll use a simple alert to demonstrate
+            alert(`Downloading PDF for: ${programTitle}\n\nIn a real implementation, this would generate a PDF document with the fee table data and allow the user to download it.`);
+            
+            // In a real implementation, you would include a PDF generation library and use code like this:
+            /*
+            import { jsPDF } from "jspdf";
+            import html2canvas from 'html2canvas';
+
+            html2canvas(feeTable).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                
+                pdf.addImage(imgData, 'PNG', imgX, 20, imgWidth * ratio, imgHeight * ratio);
+                pdf.text(programTitle, 20, 15);
+                pdf.save(`${programTitle.replace(/\s+/g, '_').toLowerCase()}_fee_structure.pdf`);
+            });
+            */
+        }
     </script>
 </body>
 </html>
