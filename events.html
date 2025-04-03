@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Calendar - Taffa Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for events page */
+        .events-full {
+            padding: 60px 0;
+            background-color: white;
+        }
+        
+        .events-full .container {
+            max-width: 1000px;
+        }
+        
+        .events-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .month-tab {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #777;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .month-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .month-tab:hover:not(.active) {
+            background-color: #e0e0e0;
+        }
+        
+        .event-month-section {
+            display: none;
+        }
+        
+        .event-month-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .event-calendar {
+            margin-top: 30px;
+        }
+        
+        .event-calendar-item {
+            display: flex;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fff;
+        }
+        
+        .event-calendar-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-date {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            padding: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .event-date .day {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        
+        .event-date .month {
+            font-size: 1rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+        
+        .event-info {
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .event-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .event-detail {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            margin-bottom: 5px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .event-detail i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .event-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .event-actions a {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: #f5f5f5;
+            color: #555;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .event-actions a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .event-actions a i {
+            margin-right: 5px;
+        }
+        
+        .page-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 15px;
+        }
+        
+        .no-events {
+            padding: 30px;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            .event-calendar-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                width: 100%;
+                padding: 15px;
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .event-date .day {
+                font-size: 1.5rem;
+                margin-right: 5px;
+            }
+            
+            .event-actions {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .event-actions a {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="images/logo.jpg" alt="Taffa Institute Logo" class="logo">
+                    <div class="logo-text">
+                        <h1>TAFFA INSTITUTE OF <br> SHIPPING & LOGISTICS </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li class="dropdown">
+                        <a href="#">ABOUT US</a>
+                        <div class="dropdown-content">
+                            <a href="historical_background.html">Historical Background</a>
+                            <a href="#">Management Team</a>
+                            <a href="#">Staff List</a>
+                            <a href="contact.html">Contacts</a>
+                            <a href="#">Board Members</a>
+                            <a href="#">Student Association</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">STUDY AT TAFFA</a>
+                        <div class="dropdown-content">
+                            <a href="#">Undergraduate Programs</a>
+                            <a href="#">Postgraduate Programs</a>
+                            <a href="#">Fee Structure</a>
+                            <a href="#">How to Apply</a>
+                            <a href="#">Student Loans</a>
+                            <a href="#">FAQ</a>
+                        </div>
+                    </li>
+                    <li><a href="#">FACULTIES</a></li>
+                    <li><a href="#">RESEARCH</a></li>
+                    <li><a href="#">LIBRARY</a></li>
+                    <li><a href="#">ICT SERVICES</a></li>
+                    <li><a href="events.html">EVENTS</a></li>
+                    <li><a href="news.html">NEWS</a></li>
+                    <li><a href="advertisements.html">ADVERTISEMENTS</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" placeholder="Search...">
+                    <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1>Almanac Events</h1>
+            <p>Academic calendar and upcoming events at Taffa Institute</p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li>Events Calendar</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Events Calendar Section -->
+    <section class="events-full">
+        <div class="container">
+            <div class="academic-year">
+                <p>2025-2026 Academic Year</p>
+                <a href="#" class="download-calendar"><i class="fas fa-download"></i> DOWNLOAD 2025-2026 ACADEMIC YEAR CALENDAR</a>
+            </div>
+            
+            <div class="events-tabs">
+                <button class="events-tab active" data-tab="jul-sep">July - September 2025</button>
+                <button class="events-tab" data-tab="oct-dec">October - December 2025</button>
+                <button class="events-tab" data-tab="jan-mar">January - March 2026</button>
+                <button class="events-tab" data-tab="apr-jun">April - June 2026</button>
+            </div>
+            
+            <div class="events-content active" id="jul-sep">
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>July 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">05</span>
+                            <span>Jul</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Final examination for all Undergraduate and Postgraduate Diploma programmes 2024/2025 begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">14</span>
+                            <span>Jul</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Supplementary/Special/Carry examinations for all Diploma II programmes 2024/2025 begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">18</span>
+                            <span>Jul</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Workers' Council Meeting</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">20</span>
+                            <span>Jul</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Final examinations for all Undergraduate and Postgraduate Diploma programmes 2024/2025 ends</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">28</span>
+                            <span>Jul</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Field practical training begins</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>August 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">13</span>
+                            <span>Aug</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Declaration of provisional Annual Examination results for all Undergraduate and Postgraduate Diploma programmes 2024/2025</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">14</span>
+                            <span>Aug</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Governing Council Meeting</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">25</span>
+                            <span>Aug</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>4th block Final examinations for all Master programmes 2024/2025 begin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>September 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">01</span>
+                            <span>Sep</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Supplementary/Special/Carry examinations for all Undergraduate and Postgraduate Diploma programmes 2024/2025 begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">14</span>
+                            <span>Sep</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Supplementary/Special/Carry examinations for all Undergraduate and Postgraduate Diploma programmes 2024/2025 ends</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">23</span>
+                            <span>Sep</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Supplementary/special/carry examinations for all Master programmes 2024/2025 begin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">29</span>
+                            <span>Sep</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Declaration of provisional Supplementary examination results for all Undergraduate and Postgraduate Diploma programmes 2024/2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="events-content" id="oct-dec">
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>October 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">10</span>
+                            <span>Oct</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Supplementary/special/carry examinations for All Master programmes 2024/2025 end</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">20</span>
+                            <span>Oct</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Release of provisional appeals results of Supplementary examinations for all Undergraduate and Postgraduate Diploma programmes 2024/2025</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">21</span>
+                            <span>Oct</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Orientation week for new students begins</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>November 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">28</span>
+                            <span>Nov</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Submission of research proposals for all Master programmes 2024/2025</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">29</span>
+                            <span>Nov</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>1st Graduation for Dar es Salaam Campus</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>December 2025</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">06</span>
+                            <span>Dec</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>1st Graduation for Mwanza Campus</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">13</span>
+                            <span>Dec</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>1st Graduation for Dodoma Campus</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">20</span>
+                            <span>Dec</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>End of semester activities and holiday begins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="events-content" id="jan-mar">
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>January 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">06</span>
+                            <span>Jan</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester begins for all programs</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">15</span>
+                            <span>Jan</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Management Meeting</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>February 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">03</span>
+                            <span>Feb</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Moderation of Semester I examinations papers for all Undergraduate and Postgraduate Diploma programmes begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">24</span>
+                            <span>Feb</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Teaching and learning activities for all Diploma II programmes 2025/2026 begin</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>March 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">10</span>
+                            <span>Mar</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Mid-semester break begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">23</span>
+                            <span>Mar</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Classes resume after mid-semester break</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="events-content" id="apr-jun">
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>April 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">05</span>
+                            <span>Apr</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>1st Semester Test examinations for all programs begin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">20</span>
+                            <span>Apr</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Research week begins</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>May 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">02</span>
+                            <span>May</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Management meeting</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">10</span>
+                            <span>May</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Test examinations for all Undergraduate and Postgraduate Diploma programmes begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">15</span>
+                            <span>May</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Governing Council meeting</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="month-events">
+                    <div class="month-header">
+                        <h3>June 2026</h3>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">02</span>
+                            <span>Jun</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>Pre-moderation for 2nd semester Final examinations for all Diploma II programmes 2025/2026 begins</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">09</span>
+                            <span>Jun</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Final examinations for all Diploma II programmes 2025/2026 begin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="event-calendar-item">
+                        <div class="event-calendar-date">
+                            <span class="day">20</span>
+                            <span>Jun</span>
+                        </div>
+                        <div class="event-calendar-details">
+                            <p>2nd Semester Teaching and learning activities for all Undergraduate and Postgraduate Diploma programmes 2025/2026 end</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> P.O Box 7900, 10 Dar es Salaam, Tanzania</p>
+                    <p><i class="fas fa-map-pin"></i> Tancot House, 4th Floor Sokoine/Pamba drive</p>
+                    <p><i class="fas fa-phone"></i> +255 (0) 22 211 8151 & +255 766 233 333</p>
+                    <p><i class="fas fa-envelope"></i> chuo@taffa.org</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Undergraduate Programs</a></li>
+                        <li><a href="#">Fee Structure</a></li>
+                        <li><a href="#">Frequently Asked Questions</a></li>
+                        <li><a href="#">Service Delivery Charter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="#">National Council for Technical Education</a></li>
+                        <li><a href="#">Commission For Universities</a></li>
+                        <li><a href="#">Government Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ICT Services</h3>
+                    <ul>
+                        <li><a href="#">Student Portal</a></li>
+                        <li><a href="#">Staff Mailing System</a></li>
+                        <li><a href="#">E-Learning System</a></li>
+                        <li><a href="#">Online Application</a></li>
+                        <li><a href="#">Library Catalog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2023 Taffa Institute of shipping and logistics. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms and Conditions</a>
+                    <a href="#">Copyright Statements</a>
+                    <a href="#">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="announcement-bar">
+        <p>Application Window for September Intake 2025-2026 is Open - <a href="#">Click Here to apply</a></p>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Events tab functionality
+        const eventTabs = document.querySelectorAll('.events-tab');
+        const eventContents = document.querySelectorAll('.events-content');
+        
+        eventTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                eventTabs.forEach(t => t.classList.remove('active'));
+                eventContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Event month filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const monthTabs = document.querySelectorAll('.month-tab');
+            const eventSections = document.querySelectorAll('.event-month-section');
+            
+            // Show the default month (first one) on page load
+            if (eventSections.length > 0) {
+                eventSections[0].classList.add('active');
+                monthTabs[0].classList.add('active');
+            }
+            
+            // Add click event listeners to month tabs
+            monthTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Get the target month from data attribute
+                    const targetMonth = this.getAttribute('data-month');
+                    
+                    // Remove active class from all tabs and sections
+                    monthTabs.forEach(t => t.classList.remove('active'));
+                    eventSections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Find and show the matching month section
+                    const targetSection = document.querySelector(`.event-month-section[data-month="${targetMonth}"]`);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // Scroll to the events calendar section
+                    document.querySelector('.events-calendar').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
